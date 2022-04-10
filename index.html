@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+  <head>
+    <script src = "http://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <title>vue Sample</title>
+  </head>
+  <body>
+    <div id="app">
+      <nav-top></nav-top>
+    </div>
+
+
+
+  </body>
+  <script>
+    var app = {};
+    app.el = '#app';
+    app.methods =  {
+      fn_dataVite : function(valObj){
+          console.log(valObj);
+        }
+    };
+    app.created = function() {
+      this.$on('fn_dataVite', this.fn_dataVite);
+    };
+    app.components = {
+        'nav-top' : {
+          template : "<div><input :value='input_value' @change = 'fn_dataVinding'></input><button @click='fn_sendData' >전송</button></div>",
+          data() {
+            return {
+              input_value : 'aa',
+            }
+          },
+          methods: {
+            fn_sendData : function(){
+              console.log(app);
+              app.$emit('fn_dataVite', this.input_value);
+            },
+            fn_dataVinding : function(e){
+              this.input_value = e.target.value;
+            },
+          },
+        },
+      }
+
+      app = new Vue(app);
+
+    // var app = new Vue({
+    //   el:'#app',
+    //   data() {
+    //     return {
+          
+    //     }
+    //   },
+    //   methods: {
+    //     fn_dataVite : function(valObj){
+    //       console.log(valObj);
+    //     }
+    //   },
+    //   created() {
+    //     this.$on('fn_dataVite', this.fn_dataVite);
+    //   },  
+    //   components : {
+    //     'nav-top' : {
+    //       template : "<div><input :value='input_value' @change = 'fn_dataVinding'></input><button @click='fn_sendData' >전송</button></div>",
+    //       data() {
+    //         return {
+    //           input_value : 'aa',
+    //         }
+    //       },
+    //       methods: {
+    //         fn_sendData : function(){
+    //           console.log(app);
+    //           app.$emit('fn_dataVite', this.input_value);
+    //         },
+    //         fn_dataVinding : function(e){
+    //           this.input_value = e.target.value;
+    //         },
+    //       },
+    //     },
+    //   },
+
+    // })
+  </script>
+</html>
